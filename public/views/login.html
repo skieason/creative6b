@@ -1,0 +1,55 @@
+<login class="login">
+  <div layout="row">
+    <div flex="25">
+
+    </div>
+    <div class="values" flex="50" ng-class="{'loading' : loading}">
+      <md-input-container ng-show="create" md-no-float class="md-block">
+        <input type="text" ng-model="user.firstName" placeholder="First Name">
+      </md-input-container>
+      <md-input-container ng-show="create" md-no-float class="md-block">
+        <input type="text" ng-model="user.lastName" placeholder="Last Name">
+      </md-input-container>
+      <md-input-container md-no-float class="md-block">
+        <input type="email" ng-model="user.email" placeholder="Email">
+      </md-input-container>
+      <md-input-container md-no-float class="md-block">
+        <input type="password" ng-model="user.password" placeholder="Password">
+      </md-input-container>
+      <md-input-container ng-show="create" md-no-float class="md-block">
+        <input type="password" ng-model="user.confirmPassword" placeholder="Confirm Password">
+      </md-input-container>
+      <p class="center ten-mb red" ng-show="user.password && user.confirmPassword && user.password !== user.confirmPassword">
+        Passwords do not match
+      </p>
+      <div layout="row" layout-align="center center">
+        <md-button ng-show="!create" ng-click="login()" ng-disabled="!user.email || !user.password">
+          login
+        </md-button>
+        <md-button ng-show="create" ng-disabled="!user.firstName || !user.lastName ||
+					!user.email || !user.password || !user.confirmPassword  ||
+					user.password !== user.confirmPassword" ng-click="createUser()">
+          create
+        </md-button>
+        <md-button ng-click="clear()">clear</md-button>
+      </div>
+    </div>
+    <div flex="25">
+
+    </div>
+  </div>
+  <div layout="row">
+    <div flex="25">
+
+    </div>
+    <div class="values" flex="50" layout="row" layout-align="center center">
+      <md-button ng-click="create = !create; clear()">
+        <span ng-show="!create">create account</span>
+        <span ng-show="create">login</span>
+      </md-button>
+    </div>
+    <div flex="25">
+
+    </div>
+  </div>
+</login>

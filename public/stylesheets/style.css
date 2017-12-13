@@ -1,0 +1,141 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+.md-datepicker-calendar-pane {
+	background: #FFFFFF;
+}
+
+.md-calendar-day-header {
+	margin-top: 15px;
+}
+
+.md-calendar-day-header th {
+	height: 30px;
+}
+
+.pull-right {
+	text-align: right;
+}
+
+.center {
+	text-align: center;
+}
+
+:focus {
+	outline: 0;
+}
+
+md-list-item.md-3-line {
+	min-height: none;
+}
+
+md-input-container:not(.md-input-invalid).md-input-focused .md-input {
+	border-color: #53b6d0;
+}
+
+md-input-container {
+	padding-bottom: 5px;
+	margin: 0;
+}
+
+.white { color: #FFFFFF; }
+.teal { color: #53b6d0; }
+.red { color: #ff5252; }
+
+md-checkbox.md-checked {
+	.md-ink-ripple {
+		color: #53b6d0;
+	}
+	.md-icon {
+		background-color: #53b6d0;
+	}
+}
+
+.ten-pr {
+	padding-right: 10px;
+}
+
+.ten-mr {
+	margin-right: 10px;
+}
+
+.ten-mb {
+	margin-bottom: 10px;
+}
+
+.twen-pr {
+	padding-right: 20px;
+}
+
+.twen-ph {
+	padding: 0 20px 0 20px;
+}
+
+.twen-mt {
+	margin-top: 20px;
+}
+
+.twen-mb {
+	margin-bottom: 20px;
+}
+
+.twen-mr {
+	margin-right: 20px;
+}
+
+.twen-ml {
+	margin-left: 20px;
+}
+
+.twen-mh {
+	margin: 0 20px 0 20px;
+}
+
+.twen-mv {
+	margin: 20px 0 20px 0;
+}
+
+.material-icons:hover {
+  opacity: .5;
+  cursor: pointer;
+}

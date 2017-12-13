@@ -1,0 +1,86 @@
+<wish-list>
+  <div ng-if="!loaded" class="twen-mt center" layout="row" layout-align="center center">
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+  </div>
+  <div ng-if="loaded &amp;&amp; wishList.length == 0" class="center twen-mt">
+    <h6>No wish lists currently exist</h6>
+  </div>
+  <div class="people" ng-if="loaded &amp;&amp; wishList.length > 0">
+    <p class="center ten-mb">
+      This is a list of stuff that you need to buy.
+    </p>
+    <div class="people-container" ng-repeat="(personKey, person) in wishList">
+      <div layout="row" layout-align="space-between center" class="person-name" ng-click="opened[$index].opened = !opened[$index].opened">
+        <b>{{person.firstName}} {{person.lastName}}</b>
+        <i ng-show="!opened[$index].opened" class="material-icons pull-right">keyboard_arrow_down</i>
+        <i ng-show="opened[$index].opened" class="material-icons pull-right">keyboard_arrow_up</i>
+      </div>
+      <div class="twen-mh" ng-show="opened[$index].opened">
+        <div ng-show="!person.items &amp;&amp; !addItem" class="center twen-mv">
+          <p>There are no items saved for
+            <span ng-show="person.id === uid"> you</span>
+            <span ng-hide="person.id === uid"> {{person.firstName}}</span>
+          </p>
+        </div>
+        <div class="purchased" ng-hide="person.id === uid || !person.items" layout="row" layout-align="space-between center">
+          <div flex="80"></div>
+          <div flex="10" layout="row" layout-align="center center">Purchased</div>
+        </div>
+        <div ng-repeat="(itemKey, item) in person.items">
+          <div ng-show="!editItems[$index].edit" class="items" layout="row" layout-align="space-between center">
+            <div flex="80" layout="column" layout-align="center start">
+              <h3>{{item.name}}</h3>
+              <p>{{item.description}}</p>
+            </div>
+            <div ng-show="person.id === uid" flex="10" layout="row" layout-align="center center">
+              <i flex="50" class="material-icons" ng-click="editItems[$index].edit = !editItems[$index].edit; beforeEdit(item)">mode_edit</i>
+              <i flex="50" class="material-icons" ng-click="showConfirm($event, itemKey)">delete</i>
+            </div>
+            <div ng-hide="person.id === uid" flex="10" layout="row" layout-align="center center">
+              <md-checkbox ng-checked="item.purchased" ng-click="purchase(person.id, itemKey, item.purchased)" aria-label="Purchased"></md-checkbox>
+            </div>
+          </div>
+          <div ng-show="editItems[$index].edit" layout="column">
+            <div layout="column">
+              <md-input-container required md-no-float class="md-block twen-mh">
+                <input ng-model="item.name" placeholder="Item Name">
+              </md-input-container>
+              <md-input-container md-no-float class="md-block twen-mh">
+                <textarea ng-model="item.description" columns="1" placeholder="Description"></textarea>
+              </md-input-container>
+            </div>
+            <div layout="row" layout-align="center center">
+              <md-button class="md-raised" ng-click="editItems[$index].edit = !editItems[$index].edit; wishList.$save()" ng-disabled="item.name === '' || item.description === ''">
+                save
+              </md-button>
+              <md-button class="md-raised" ng-click="editItems[$index].edit = !editItems[$index].edit; cancelEdit(item)">
+                cancel
+              </md-button>
+            </div>
+          </div>
+        </div>
+        <md-button class="md-raised add" ng-show="!addItem &amp;&amp; person.id === uid" ng-click="addItem = !addItem">
+          add item
+        </md-button>
+        <div class="form" ng-show="addItem">
+          <div layout="column">
+            <md-input-container md-no-float class="md-block">
+              <input ng-model="newItem.name" placeholder="Item Name">
+            </md-input-container>
+            <md-input-container md-no-float class="md-block">
+              <textarea ng-model="newItem.description" columns="1" placeholder="Description (Optional)"></textarea>
+            </md-input-container>
+          </div>
+          <div layout="row" layout-align="center center">
+            <md-button class="md-raised" ng-click="add(newItem.name, newItem.description); newItem.name = ''; newItem.description = ''"
+              ng-disabled="newItem.name === '' || newItem.description === ''">
+              save
+            </md-button>
+            <md-button class="md-raised" ng-click="addItem = !addItem; newItem.name = ''; newItem.description = ''">close</md-button>
+          </div>
+        </div>
+      </div>
+      <md-divider ng-if="!$last"></md-divider>
+    </div>
+  </div>
+</wish-list>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Creative 6</title>
+
+  <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
+  <script src="//cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
+  <script src="//unpkg.com/angular-ui-router/release/angular-ui-router.min.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="stylesheets/main.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
+  <script src="javascripts/app.js"></script>
+  <script src="javascripts/login.directive.js"></script>
+  <script src="javascripts/wishlist.directive.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyCj9hgaxM0mVo5G68iXJ9n8NcTqE-sbRiM",
+      authDomain: "creative6-7b6f1.firebaseapp.com",
+      databaseURL: "https://creative6-7b6f1.firebaseio.com",
+      projectId: "creative6-7b6f1",
+      storageBucket: "",
+      messagingSenderId: "984831716072"
+    };
+    firebase.initializeApp(config);
+  </script>
+</head>
+
+<body ng-app="creative6" layout="column">
+  <header layout="row" ng-controller="mainController">
+    <!--Shows only when the screen width is less than 960px-->
+    <div ng-show="uid" hide-gt-sm flex="90" layout="row" layout-align="end center">
+      <md-button ng-click="openSideNav()">
+        <md-icon class="teal">menu</md-icon>
+      </md-button>
+      <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right">
+        <div class="sidenav-header" layout="row" layout-align="end center">
+          <md-button ng-click="close()">
+            <md-icon class="teal">close</md-icon>
+          </md-button>
+        </div>
+        <md-content layout-padding>
+          <md-list>
+            <md-list-item class="md-1-line" ng-repeat="place in places">
+              <md-button ng-click="close()" ui-sref="{{place.sref}}">{{place.name}}</md-button>
+              <md-divider></md-divider>
+            </md-list-item>
+            <md-list-item class="md-1-line">
+              <md-button ng-click="close(); auth.$unauth()">Logout</md-button>
+            </md-list-item>
+          </md-list>
+        </md-content>
+      </md-sidenav>
+    </div>
+    <!--Shows only when the screen width is greater than 960px-->
+    <div ng-show="uid" hide show-gt-sm flex="90" layout="row" layout-align="space-around center">
+      <div class="text" flex="80">
+        <md-content class="background">
+          <md-tabs md-selected="location" md-dynamic-height md-border-bottom>
+            <md-tab class="text" label="Wish List" ui-sref="wishlist"></md-tab>
+          </md-tabs>
+        </md-content>
+      </div>
+      <div>
+        <md-content class="background">
+          <md-button class="text button" ng-click="signout()">Sign Out</md-button>
+        </md-content>
+      </div>
+    </div>
+  </header>
+  <main ui-view="" flex=""></main>
+</body>
+
+</html>
