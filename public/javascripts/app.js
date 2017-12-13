@@ -25,9 +25,9 @@ app.config(['$stateProvider', '$urlRouterProvider',
         templateUrl: 'views/login.html'
       })
 
-      .state('wish-list', {
-        url: '/wishlist',
-        templateUrl: 'views/wishlist.html'
+      .state('shopping-list', {
+        url: '/shopping-list',
+        templateUrl: 'views/shopping.html'
       });
 
     $urlRouterProvider.otherwise('/');
@@ -46,7 +46,7 @@ app.run([
         $scope.uid = authData.uid;
         firebaseService.init();
         $scope.currentUser = firebaseService.auth().currentUser;
-        $state.go('wish-list')
+        $state.go('shopping-list')
       } else {
         $scope.uid = null;
         $state.go('login');

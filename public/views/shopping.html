@@ -3,7 +3,7 @@
     <md-progress-circular md-mode="indeterminate"></md-progress-circular>
   </div>
   <div ng-if="loaded &amp;&amp; shoppingList.length == 0" class="center twen-mt">
-    <h6>You don't have a shopping list</h6>
+    <h6>You don't have any shopping lists</h6>
   </div>
   <div class="people" ng-if="loaded &amp;&amp; shoppingList.length > 0">
     <p class="center ten-mb">
@@ -29,16 +29,16 @@
         <div ng-repeat="(itemKey, item) in person.items">
           <div ng-show="!editItems[$index].edit" class="items" layout="row" layout-align="space-between center">
             <div flex="80" layout="column" layout-align="center start">
-              <h3>{{item.name}}</h3>
+              <h3>${{item.price}} - {{item.name}}</h3>
               <p>{{item.description}}</p>
             </div>
             <div ng-show="person.id === uid" flex="10" layout="row" layout-align="center center">
               <i flex="50" class="material-icons" ng-click="editItems[$index].edit = !editItems[$index].edit; beforeEdit(item)">mode_edit</i>
               <i flex="50" class="material-icons" ng-click="showConfirm($event, itemKey)">delete</i>
             </div>
-            <div ng-show="person.id === uid" flex="10" layout="row" layout-align="center center">
-              In Cart:
-              <md-checkbox ng-checked="item.purchased" ng-click="purchase(person.id, itemKey, item.purchased)" aria-label="Purchased"></md-checkbox>
+            <div ng-show="person.id === uid" flex="10" layout="column" layout-align="center center">
+              <div class="in-cart">In Cart</div>
+              <div><md-checkbox ng-checked="item.purchased" ng-click="purchase(person.id, itemKey, item.purchased)" aria-label="Purchased"></md-checkbox></div>
             </div>
           </div>
           <div ng-show="editItems[$index].edit" layout="column">
@@ -63,8 +63,13 @@
             </div>
           </div>
         </div>
+        <div>Total List Price: ${{listPrice()}}</div>
+        <div>Total Cart Price: ${{listCartPrice()}}</div>
         <md-button class="md-raised add" ng-show="!addItem &amp;&amp; person.id === uid" ng-click="addItem = !addItem">
           add item
+        </md-button>
+        <md-button class="md-raised add" ng-show="!addItem &amp;&amp; person.id === uid" ng-click="showPurchaseConfirm($event, person.items)">
+          purchase items in cart
         </md-button>
         <div class="form" ng-show="addItem">
           <div layout="column">
@@ -79,7 +84,7 @@
             </md-input-container>
           </div>
           <div layout="row" layout-align="center center">
-            <md-button class="md-raised" ng-click="add(newItem.name, newItem.description); newItem.name = ''; newItem.description = ''"
+            <md-button class="md-raised" ng-click="add(newItem.name, newItem.description, newItem.price); newItem.name = ''; newItem.description = ''"
               ng-disabled="newItem.name === '' || newItem.description === '' || newItem.price === ''">
               save
             </md-button>

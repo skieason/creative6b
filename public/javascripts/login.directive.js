@@ -20,7 +20,7 @@ function loginDirective(firebaseService, $mdToast, $state) {
         firebaseService.auth().signInWithEmailAndPassword($scope.user.email, $scope.user.password)
           .then(function (success) {
             hideToast();
-            $state.go('wish-list');
+            $state.go('shopping -list');
           })
           .catch(function (error) {
             error = firebaseService.getErrorMessage(error);
